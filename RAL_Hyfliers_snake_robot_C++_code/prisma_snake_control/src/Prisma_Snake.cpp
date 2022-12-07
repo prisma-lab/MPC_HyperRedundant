@@ -1252,8 +1252,8 @@ void CONTROLLER::arm_invdyn_control() {
     double W_e[NX][NX] = {0};                       // weight on N-th horizon of each iteration
 
     W_0[0][0] = 0.1;
-    W_0[1][1] = 0.01;
-    W_0[2][2] = 0.01;
+    W_0[1][1] = 0.1;
+    W_0[2][2] = 0.1;
     W_0[3][3] = 0.001;
     W_0[4][4] = 0.001;
 
