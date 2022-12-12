@@ -1139,7 +1139,7 @@ void CONTROLLER::new_plan() {
 			_traj_ready = true;
 			_goal_reached = false;
 			_start_controller = true;
-			cout<<"+++++TRAJECTORY CORRECTLY PLANNED+++++"<<endl;
+			cout<<"+++++Planning Completed+++++"<<endl;
 		}
 
 		r.sleep();
