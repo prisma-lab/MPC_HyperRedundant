@@ -12,6 +12,7 @@ The MPC is implemented with the ACADOS library in MATLAB and than converted to C
 To install Acados on your PC follow the guide here https://github.com/acados/acados
 
 To compile the ros node:
+
 Create a ros workspace and copy in src the folder prisma_snake_control, prisma_snake_support_gazebo and industrial_environment.
 
 Open a terminal and type:
