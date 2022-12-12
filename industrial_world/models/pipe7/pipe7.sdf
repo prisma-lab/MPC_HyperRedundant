@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+<!--<sdf version="1.7"> -->
+  <model name="pipe7">
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://pipe7/meshes/pipe7.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://pipe7/meshes/pipe7.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
