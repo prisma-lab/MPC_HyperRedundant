@@ -1,0 +1,132 @@
+prisma_snake:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  # Position Controllers ---------------------------------------
+
+  jointFrame_position_controller:
+    type: position_controllers/JointPositionController
+    joint: JFrame
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  jointMotor_position_controller:
+     type: position_controllers/JointPositionController
+     joint: JMotor
+     pid: {p: 10.0, i: 0.001, d: 0.01}
+
+#  joint1_position_controller:
+#    type: position_controllers/JointPositionController
+#    joint: J1
+#    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint2_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J2
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint3_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J3
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint4_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J4
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint5_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J5
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J6
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint7_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J7
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint8_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J8
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint9_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J9
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint10_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J10
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint11_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J11
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint12_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J12
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint13_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J13
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint14_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J14
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint15_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J15
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint16_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J16
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint17_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J17
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint18_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J18
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  joint20_position_controller:
+    type: position_controllers/JointPositionController
+    joint: J20
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+  jointprobe_position_controller:
+    type: position_controllers/JointPositionController
+    joint: Probe_joint
+    pid: {p: 10.0, i: 0.001, d: 0.01}
+
+
+
+  JointWheel_F_dx_position_controller:
+    type: effort_controllers/JointEffortController
+    joint: JointWheel_F_sx
+  JointWheel_F_sx_position_controller:
+    type: effort_controllers/JointEffortController
+    joint: JointWheel_F_dx
+  JointWheel_R_sx_position_controller:
+    type: effort_controllers/JointEffortController
+    joint: JointWheel_R_sx
+  JointWheel_R_dx_position_controller:
+    type: effort_controllers/JointEffortController
+    joint: JointWheel_R_dx
+

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<!--Generates a urdf from the macro in kr120r2500pro_macro.xacro -->
+<robot name="prisma_snake" xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:include filename="$(find prisma_snake_support_gazebo)/urdf/prisma_snake_macro.xacro" />
+    <xacro:prisma_snake prefix=""/>
+</robot>
+

@@ -1,0 +1,248 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+	<!-- WORLD -->
+	<!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <env name="GAZEBO_MODEL_PATH" value="$(find industrial_worlds)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+	
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+	  <arg name="world_name" value="$(find industrial_worlds)/worlds/industrial_snake.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+	
+
+	<param name="robot_description" command="$(find xacro)/xacro --inorder '$(find prisma_snake_support_gazebo)/urdf/prisma_snake.xacro'" /> 
+
+<!--USATO PER TASK FINALE-->
+	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model prisma_snake -param robot_description
+		-J JFrame  1.617291898068025
+		-J JMotor  0.0
+		-J J2 -1.048558443070210
+		-J J3 -0.685436693758534
+		-J J4 -0.685599771825468
+		-J J5 -0.187653686972250
+		-J J6  0.145119675834729
+		-J J7  0.819119912480271
+		-J J8  0.684238725497609
+		-J J9  0.673976354840312
+		-J J10 0.611772808716284
+		-J J11  0.476893764851552
+		-J J12  0.103672557568423
+		-J J13  0.145141580595989
+		-J J14 -0.093410021566777
+		-J J15  0.414690230273994
+		-J J16  0.041469023027346
+		-J J17  0.031206487025799
+		-J J18 -0.031206487025699
+		-J J20  0.146240646533758
+		-J probe_joint  0
+			
+		-x 2 -y -1.205 -z 2.29
+		-R -0.0872 -P 0.0 -Y 0
+
+		"/>
+<!--		-x 2 -y -1.185 -z 2.285-->
+<!--		-R -0.1745 -P 0.0 -Y 0-->
+
+<!--		"/>				-->
+<!--		-x 2 -y -1.185 -z 0.24-->
+<!--		-R -0.0 -P 0.0 -Y 0-->
+
+<!--		"/>				-->
+<!--		-x 2 -y -1.185 -z 2.285-->
+<!--		-R -0.1745 -P 0.0 -Y 0-->
+
+<!--		"/>		-->
+	
+<!--	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"-->
+<!--	args="-urdf -model prisma_snake -param robot_description-->
+<!--		-J JFrame 2.129280405183376-->
+<!--		-J JMotor -0.131338691629848-->
+<!--		-J J2 -0.983808754443407-->
+<!--		-J J3 -0.835476351064333-->
+<!--		-J J4 -0.639446994570274-->
+<!--		-J J5 -0.424060091072052-->
+<!--		-J J6 -0.211090281871687-->
+<!--		-J J7 -0.012115983971061-->
+<!--		-J J8 0.165419460681376-->
+<!--		-J J9 0.312997658898003-->
+<!--		-J J10 0.419009599573348-->
+<!--		-J J11 0.471330502005253-->
+<!--		-J J12 0.463142076139018-->
+<!--		-J J13 0.396839737983804-->
+<!--		-J J14 0.281686778766786-->
+<!--		-J J15 0.127614832597843-->
+<!--		-J J16 -0.058791840689566-->
+<!--		-J J17 -0.273249368145337-->
+<!--		-J J18 -0.508505042999222-->
+<!--		-J J20 -0.748743532400678-->
+<!--		-J Probe_joint -0.873761253682805-->
+<!--		-x 2 -y -1.185 -z 2.285-->
+<!--		-R -0.1745 -P 0.0 -Y 0-->
+
+<!--		"/>-->
+
+<!--		idc-->
+<!--	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"-->
+<!--	args="-urdf -model prisma_snake -param robot_description-->
+<!--		-J JFrame 2.129280405183376-->
+<!--		-J JMotor -0.131338691629848-->
+<!--		-J J2 -0.983808754443407-->
+<!--		-J J3 -0.835476351064333-->
+<!--		-J J4 -0.639446994570274-->
+<!--		-J J5 -0.424060091072052-->
+<!--		-J J6 -0.211090281871687-->
+<!--		-J J7 -0.012115983971061-->
+<!--		-J J8 0.165419460681376-->
+<!--		-J J9 0.312997658898003-->
+<!--		-J J10 0.419009599573348-->
+<!--		-J J11 0.471330502005253-->
+<!--		-J J12 0.463142076139018-->
+<!--		-J J13 0.396839737983804-->
+<!--		-J J14 0.281686778766786-->
+<!--		-J J15 0.127614832597843-->
+<!--		-J J16 -0.058791840689566-->
+<!--		-J J17 -0.273249368145337-->
+<!--		-J J18 -0.508505042999222-->
+<!--		-J J20 -0.748743532400678-->
+<!--		-J Probe_joint -0.873761253682805-->
+<!--		-x 2 -y -1.18 -z 0.24-->
+<!--		-R 0.0 -P 0.0 -Y 0-->
+
+<!--		"/>-->
+
+
+<!--	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"-->
+<!--	args="-urdf -model prisma_snake -param robot_description-->
+<!--		-J JFrame 0.55-->
+<!--		-J JMotor -0.04-->
+<!--		-J J2 0.28-->
+<!--		-J J3 -0.69-->
+<!--		-J J4 -0.52-->
+<!--		-J J5 -0.4-->
+<!--		-J J6 -0.31-->
+<!--		-J J7 -0.21-->
+<!--		-J J8 -0.31-->
+<!--		-J J9 0.23-->
+<!--		-J J10 0.44-->
+<!--		-J J11 0.45-->
+<!--		-J J12 0.45-->
+<!--		-J J13 0.39-->
+<!--		-J J14 0.30-->
+<!--		-J J15 0.17-->
+<!--		-J J16 0.26-->
+<!--		-J J17 0.28-->
+<!--		-J J18 0.37-->
+<!--		-J J20 0.32-->
+<!--		-J Probe_joint 0.0-->
+<!--		-x 2 -y -1.18 -z 2.29-->
+<!--		-R -0.1745 -P 0.0 -Y 0-->
+
+<!--		"/>-->
+<!--		-x 2 -y -1.45 -z 0.17 on the floor--> 
+<!--
+	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model prisma_snake -param robot_description
+		-J J2 1.57
+		-J J3 1.57
+		-J J4 1.57
+		-J J5 0.0
+		-J J9 1.57
+		-J J10 0.5
+		-J J12 0.55
+		-J J13 1.57
+		-J J18 1.57
+		-x 1 -y -1.45 -z 1.9
+    -R 0.0 -P 0.0 -Y 3.1515
+		"/>
+-->
+
+
+<!--	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"-->
+<!--	args="-urdf -model prisma_snake -param robot_description-->
+<!--		-J J2 0.0-->
+<!--		-J J3 0.0-->
+<!--		-J J4 0.0-->
+<!--		-J J5 0.0-->
+<!--		-J J9 0.0-->
+<!--		-J J10 0.0-->
+<!--		-J J12 0.0-->
+<!--		-J J13 0.0-->
+<!--		-J J18 0.0-->
+<!--		-x 2 -y -1.45 -z 0.25	-->
+<!--		-R 0.0 -P 0.0 -Y 0-->
+<!--		"/>-->
+		
+		
+<!--			ORIGINALE	-->
+<!--	<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"-->
+<!--	args="-urdf -model prisma_snake -param robot_description-->
+<!--		-J J2 1.1-->
+<!--		-J J3 1.04-->
+<!--		-J J4 1.04-->
+<!--		-J J5 0.0-->
+<!--		-J J9 1.04-->
+<!--		-J J10 0.5-->
+<!--		-J J12 0.55-->
+<!--		-J J13 1.04-->
+<!--		-J J18 1.04-->
+<!--		-x 2 -y -1.185 -z 2.285-->
+<!--		-R -0.1745 -P 0.0 -Y 0-->
+<!--		"/>-->
+
+<!--
+
+		-x 1 -y -1.45 -z 2.15
+		posa a +10 gradi:
+		-x 2 -y -1.28 -z 2.29
+		-R -0.1745 -P 0.0 -Y 0
+
+On the tube: 1, -1.45, 1.85 -->
+				
+	<rosparam file="$(find prisma_snake_support_gazebo)/config/prisma_snake_control.yaml" command="load"/>
+<!--
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/prisma_snake" args="joint_state_controller JointWheel_F_dx_position_controller JointWheel_F_sx_position_controller JointWheel_R_dx_position_controller JointWheel_R_sx_position_controller" />
+-->
+
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/prisma_snake" args="joint_state_controller JointWheel_F_dx_position_controller JointWheel_F_sx_position_controller JointWheel_R_dx_position_controller JointWheel_R_sx_position_controller jointFrame_position_controller jointMotor_position_controller joint2_position_controller joint3_position_controller joint4_position_controller joint5_position_controller joint6_position_controller joint7_position_controller joint8_position_controller joint9_position_controller joint10_position_controller joint11_position_controller joint12_position_controller joint13_position_controller joint14_position_controller joint15_position_controller joint16_position_controller joint17_position_controller joint18_position_controller joint20_position_controller  jointprobe_position_controller" />
+
+
+
+
+	<remap from="joint_states" to="/prisma_snake/joint_states" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+	</node>
+	
+
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

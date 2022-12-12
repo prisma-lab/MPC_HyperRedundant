@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<launch>
+
+
+  <param name="robot_description" textfile="/home/jcacace/dev/ROS/src/UAV/Firmware/Tools/sitl_gazebo/models/rotors_description/urdf/tarot_with_snake/tarot_base.urdf" />
+
+
+	<rosparam file="$(find mavlink_sitl_gazebo)/config/prisma_snake_control.yaml" command="load"/>
+	<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" ns="/prisma_snake" args="joint_state_controller jointFrame_position_controller jointMotor_position_controller joint2_position_controller joint3_position_controller joint4_position_controller joint5_position_controller joint6_position_controller joint7_position_controller joint8_position_controller joint9_position_controller joint10_position_controller joint11_position_controller joint12_position_controller joint13_position_controller joint14_position_controller joint15_position_controller joint16_position_controller joint17_position_controller joint18_position_controller joint20_position_controller  jointprobe_position_controller"/>
+
+</launch>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

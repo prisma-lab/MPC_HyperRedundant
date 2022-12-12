@@ -1,0 +1,1602 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+	<xacro:property name="DEG2RAD" value="0.017453292519943295"/>
+  
+  <xacro:include filename="$(find prisma_snake_support_gazebo)/urdf/plugin.gazebo" />
+  
+  <!-- caster wheel proprieties  -->
+  <xacro:property name="caster_height" value="0.015" /> 
+  <xacro:property name="caster_radius" value="0.025" /> 
+  <xacro:property name="caster_mass" value="0.5" /> <!-- in kg-->
+
+  <!-- Wheels -->
+  <xacro:property name="wheel_radius" value="0.035" /> 
+  <xacro:property name="wheel_height" value="0.02" />
+  <xacro:property name="wheel_mass" value="2.5" /> <!-- in kg-->
+  
+  <xacro:property name="base_x_origin_to_wheel_origin" value="0.25" />
+  <xacro:property name="base_y_origin_to_wheel_origin" value="0.3" />
+  <xacro:property name="base_z_origin_to_wheel_origin" value="0.0" />
+
+	<xacro:property name="mass" value="0.02" />
+  
+
+	<xacro:macro name="prisma_snake" params="prefix">
+		<xacro:macro name="transmission_block" params="joint_name">
+			<transmission name="tran1">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="${joint_name}">
+					<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+				</joint>
+				<actuator name="motor1">
+					<mechanicalReduction>1</mechanicalReduction>
+				</actuator>
+			</transmission>
+		</xacro:macro>
+
+
+
+		<xacro:macro name="velocity_transmission_block" params="joint_name">
+			<transmission name="tran2">
+				<type>transmission_interface/SimpleTransmission</type>
+				<joint name="${joint_name}">
+						<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+					</joint>
+				<actuator name="motor1">
+						<hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+					<mechanicalReduction>1</mechanicalReduction>
+				</actuator>
+			</transmission>
+		</xacro:macro>
+	
+  <!-- LINKS -->
+  <!-- base link-->
+	<!--
+	<link name="world" />
+ 	-->
+
+
+	<link
+    name="uav_link">
+   <inertial>
+    <!--
+		<origin rpy="0 0 0" xyz="0.2979303555193108 2.625110129346654e-07 0.31875747926595327"/>
+		-->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+		<mass value="2.8"/>
+    <inertia ixx="0.108" ixy="0.0" ixz="0.0" iyy="0.108" iyz="0.0" izz="0.108"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/drone_no_prop_no_sup_cu.stl" scale="0.0001 0.0001 0.0001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/drone_no_prop_no_sup_cu.stl" scale="0.0001 0.0001 0.0001"/>
+    </geometry>
+  </collision>
+  </link>
+
+	<link name="Rover_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="1.2"/>
+    <inertia ixx="0.01" ixy="0.0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.2506 0.0 -0.1755"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/Rover_1_cu.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.2506 0.0 -0.1755"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/Rover_1_cu.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <contact_coefficients>
+          <mu>0.1</mu>
+          <kp>0.1</kp>
+          <kd>0.1</kd>
+    </contact_coefficients>
+  </collision>
+</link>
+
+<link name="Rover_2">
+  <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="1.2"/>
+    <inertia ixx="0.01" ixy="0.0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.3706 0.0 -0.1755"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/Rover_2_cu.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.3706 0.0 -0.1755"/>
+    <geometry>
+      <mesh filename="package://prisma_snake_support_gazebo/meshes/Rover_2_cu.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+<!--
+    <contact_coefficients>
+          <mu>0.1</mu>
+          <kp>0.1</kp>
+          <kd>0.1</kd>
+    </contact_coefficients>
+ -->
+ </collision>
+</link>
+
+<joint name="JointRoverFront" type="fixed">
+  <origin rpy="0 0 0" xyz="-0.06 0.0 -0.07"/>
+  <parent link="uav_link"/>
+  <child link="Rover_1"/>
+  <axis xyz="-0.0 -0.0 1.0"/>
+</joint>
+
+<joint name="JointRoverRetro" type="fixed">
+  <origin rpy="0 0 0" xyz="0.06 0.0 -0.07"/>
+	  
+	<parent link="uav_link"/>
+  <child link="Rover_2"/>
+  <axis xyz="-0.0 -0.0 1.0"/>
+</joint>
+
+<link name="Wheel_dx_1">
+  <inertial>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <mass value="1.35"/>
+    <inertia ixx="0.0008" ixy="0.0" ixz="0.0" iyy="0.0008" iyz="0.0" izz="0.0008"/>
+  </inertial>
+  <visual>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+  <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+        </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+   <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+        </geometry>
+  </collision>
+</link>
+
+<joint name="JointWheel_F_sx" type="continuous"> 
+  <limit effort="10000.0" lower="-1000" upper="1000" velocity="2000.0"/>
+  <origin rpy="0 0 0" xyz="-0.024 0.087805 -0.043358"/>
+  <parent link="Rover_1"/>
+  <child link="Wheel_dx_1"/>
+  <axis xyz="-1.0 -0.0 -0.0"/>
+</joint>
+
+<link name="Wheel_sx_1">
+  <inertial>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <mass value="1.35"/>
+    <inertia ixx="0.0008" ixy="0.0" ixz="0.0" iyy="0.0008" iyz="0.0" izz="0.0008"/>
+  </inertial>
+  <visual>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+    </geometry>
+  </collision>
+</link>
+<joint name="JointWheel_F_dx" type="continuous">
+  <limit effort="10000.0" lower="-1000" upper="1000" velocity="2000.0"/>
+  <origin rpy="0 0 0" xyz="-0.024 -0.087805 -0.043358"/>
+  <parent link="Rover_1"/>
+  <child link="Wheel_sx_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+
+<link name="Wheel_sx_2">
+  <inertial>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <mass value="1.35"/>
+    <inertia ixx="0.0008" ixy="0.0" ixz="0.0" iyy="0.0008" iyz="0.0" izz="0.0008"/>
+  </inertial>
+  <visual>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+
+    <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+    <geometry>
+          <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+    </geometry>
+  </collision>
+</link>
+
+	<link name="Wheel_dx_2">
+		<inertial>
+<!--		  <origin rpy="0 0 0" xyz="-0.024031420359043487 -3.466334117102621e-07 4.034042055706122e-06"/>-->
+		  <origin rpy="0 0 0" xyz="-0.025 0.0 0.0"/>
+    <mass value="1.35"/>
+    <inertia ixx="0.0008" ixy="0.0" ixz="0.0" iyy="0.0008" iyz="0.0" izz="0.0008"/>
+		</inertial>
+		<visual>
+		  <origin rpy="1.57 0 1.57" xyz="-0.025 0.0 0"/>
+
+		  <geometry>
+		        <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+		  </geometry>
+		  <material name="silver"/>
+		</visual>
+		<collision>
+		  <origin rpy="1.57 0 1.57" xyz="-0.02 0.0 0"/>
+		  <geometry>
+		        <cylinder length="${wheel_height}" radius="${wheel_radius}" />
+		  </geometry>
+		</collision>
+	</link>
+
+
+	<joint name="JointWheel_R_dx" type="continuous">
+		<limit effort="10000.0" lower="-1000" upper="1000" velocity="2000.0"/>
+		<origin rpy="0 0 0" xyz="0.0722 0.087805 -0.043358"/>
+		<parent link="Rover_2"/>
+		<child link="Wheel_dx_2"/>
+		<axis xyz="-1.0 -0.0 -0.0"/>
+	</joint>
+
+	<joint name="JointWheel_R_sx" type="continuous">
+		<limit effort="10000.0" lower="-1000" upper="1000" velocity="2000.0"/>
+		<origin rpy="0 0 0" xyz="0.0722 -0.087805 -0.043358"/>
+		<parent link="Rover_2"/>
+		<child link="Wheel_sx_2"/>
+		<axis xyz="-1.0 0.0 0.0"/>
+	</joint>
+
+	
+
+	<link name="base_footprint">
+	</link>
+
+	<joint name="base_footprint_joint"
+    type="fixed">
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.3"/>
+    <parent
+      link="uav_link" />
+    <child
+      link="base_footprint" />
+  </joint>
+
+
+	<link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0.0 0.0 0.0"
+        rpy="0 0 0" />
+      <mass
+        value="0.01" />
+      <inertia
+        ixx="0.01"
+        ixy="0"
+        ixz="0"
+        iyy="0.01"
+        iyz="0"
+        izz="0.01" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0.00 0.00 0.00"
+        rpy="0.00 0.00 0.00" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+ 
+	<joint
+    name="base_footprint_base_link_joint"
+    type="fixed">
+		<origin
+      xyz="-0.05 0.0  0.455"
+      rpy="3.14159 0 1.57079" />
+		<parent
+      link="base_footprint" />
+    <child
+      link="base_link" />
+   </joint>
+
+<!--
+	<joint
+    name="uav_joint"
+    type="fixed">
+    <origin
+      xyz="-0.05 0.0  0.155"
+      rpy="3.1415 0.0 1.57" />
+    <parent
+      link="uav_link" />
+    <child
+      link="base_link" />
+   </joint>
+-->
+
+  <link
+    name="LFrame">
+    <inertial>
+<!--      <origin-->
+<!--        xyz="-0.248469510078303 -0.563614377028206 0.1"   -->
+<!--        rpy="0.00 0.00 0.00" />-->
+      <origin
+        xyz="-0.0248469510078303 -0.0563614377028206 0.01"   
+        rpy="0.00 0.00 0.00" />
+      <mass
+        value="0.05180236101214" />
+        <inertia
+         ixx="0.0"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0"
+        iyz="0.0"
+        izz="0.0"  />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/LFrame.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/LFrame.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+  <joint
+    name="JFrame"
+    type="continuous">
+    <origin
+      xyz="0.00772822 0.0399874 0"
+      rpy="-1.570796 0 -1.570796" />
+    <parent
+      link="base_link" />
+    <child
+      link="LFrame" />
+    <axis
+      xyz="0 1 0" />
+		<limit 
+      effort="10"
+      velocity="1.57" />
+  </joint>
+
+
+
+  <link
+    name="LMotor">
+    <inertial>
+      <origin
+        xyz="-0.01 -0.04 -0.04"
+        rpy="0 0 0" />
+      <mass
+        value="0.254048214605011" />
+     <inertia
+        ixx="0.001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.001"
+        iyz="0.0"
+        izz="0.001"  />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/LMotor_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/LMotor_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="JMotor"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="1.570796 1.570796 -1.570796" />
+    <parent
+      link="LFrame" />
+    <child
+      link="LMotor" />
+    <axis
+      xyz="0 0 1" />
+   	
+		 <limit
+      lower="-1.5707963267949"
+      upper="1.5707963267949"
+      effort="10"
+      velocity="1.57" />
+		
+  </joint>
+
+  <link
+    name="L1">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.0209796269968244" />
+      <inertia
+         ixx="0.0"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0"
+        iyz="0.0"
+        izz="0.0"  />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J1"
+    type="fixed">
+    <origin
+      xyz="0 -0.0224478 -0.127545"
+      rpy="3.14159 1.570796 0" />
+    <parent
+      link="LMotor" />
+    <child
+      link="L1" />
+   </joint>
+
+  <link
+    name="L2">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+             <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J2"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L1" />
+    <child
+      link="L2" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.993998967010373"
+      upper="1.10039613538283"
+      effort="10"
+      velocity="1.57" />
+
+  </joint>
+
+	
+  <link
+    name="L3">
+    <inertial>
+     <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+                <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J3"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L2" />
+    <child
+      link="L3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.03792338949131"
+      upper="1.05647171290189"
+      effort="10"
+      velocity="1.57" />
+  </joint>
+
+	
+  <link
+    name="L4">
+    <inertial>
+     <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint
+    name="J4"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L3" />
+    <child
+      link="L4" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04855844307021"
+      upper="1.04583665932299"
+       effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L5">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+             <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J5"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L4" />
+    <child
+      link="L5" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04698399748418"
+      upper="1.04741110490902"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L6">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+               <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J6"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L5" />
+    <child
+      link="L6" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04721945595772"
+      upper="1.04717564643548"
+       effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L7">
+    <inertial>
+     <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+               <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J7"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L6" />
+    <child
+      link="L7" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719556326231"
+      upper="1.04719953913089"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L8">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J8"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L7" />
+    <child
+      link="L8" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719770565085"
+      upper="1.04719739674235"
+        effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L9">
+    <inertial>
+    <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J9"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L8" />
+    <child
+      link="L9" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719754030642"
+      upper="1.04719756208678"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L10">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+               <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J10"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L9" />
+    <child
+      link="L10" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755188937"
+      upper="1.04719755050383"
+       effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L11">
+    <inertial>
+     <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J11"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L10" />
+    <child
+      link="L11" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755115998"
+      upper="1.04719755123322"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L12">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J12"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L11" />
+    <child
+      link="L12" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119664"
+      upper="1.04719755119656"
+        effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L13">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J13"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L12" />
+    <child
+      link="L13" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119646"
+      upper="1.04719755119674"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L14">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+              <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J14"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L13" />
+    <child
+      link="L14" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119664"
+      upper="1.04719755119656"
+        effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L15">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+             <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J15"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L14" />
+    <child
+      link="L15" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119646"
+      upper="1.04719755119674"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L16">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+            <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J16"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L15" />
+    <child
+      link="L16" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119664"
+      upper="1.04719755119656"
+       effort="10"
+      velocity="1.57" />
+
+  </joint>
+  <link
+    name="L17">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+             <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J17"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L16" />
+    <child
+      link="L17" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119646"
+      upper="1.04719755119674"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+  <link
+    name="L18">
+    <inertial>
+      <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+               <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L2_cu.stl" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J18"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="L17" />
+    <child
+      link="L18" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-1.04719755119664"
+      upper="1.04719755119656"
+        effort="10"
+      velocity="1.57" />
+
+  </joint>
+ 	
+  <link
+    name="L20">
+    <inertial>
+     <origin
+        xyz="0.0258999036432844 0.0239999454766124 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+             <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L20.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.698039215686274 0.698039215686274 0.698039215686274 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/L20.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="J20"
+    type="revolute">
+    <origin
+      xyz="0.0525 0 0"
+      rpy="3.14159 -1.570796 -3.14159" />
+    <parent
+      link="L18" />
+    <child
+      link="L20" />
+    <axis
+      xyz="0 1 0" />
+		 <limit
+      lower="-1.07730497228435"
+      upper="1.01709013010885"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+		<!--
+		xyz="0.000801942613792017 3.73115540755475E-08 -0.00846677202059798"
+		-->
+
+  <link
+    name="Probe">
+    <inertial>
+      <origin
+	   xyz="0.0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="${mass}" />
+         <inertia ixx="0.0006"  ixy="0"  ixz="0" iyy="0.0006" iyz="0" izz="0.0006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/Probe.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prisma_snake_support_gazebo/meshes/Probe.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Probe_joint" 
+    type="revolute">
+    <origin
+      xyz="0 0.0239999 -0.033"
+      rpy="0 0 0" />
+    <parent
+      link="L20" />
+    <child
+      link="Probe" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.39626340159547"
+      upper="1.39626340159547"
+        effort="10"
+      velocity="1.57" />
+  </joint>
+
+
+	<xacro:transmission_block joint_name="JFrame"/>
+	<xacro:transmission_block joint_name="JMotor"/>
+	
+	<xacro:transmission_block joint_name="J2"/>
+	<xacro:transmission_block joint_name="J3"/>
+	<xacro:transmission_block joint_name="J4"/>
+	<xacro:transmission_block joint_name="J5"/>
+	<xacro:transmission_block joint_name="J6"/>
+	<xacro:transmission_block joint_name="J7"/>
+	<xacro:transmission_block joint_name="J8"/>
+	<xacro:transmission_block joint_name="J9"/>
+	<xacro:transmission_block joint_name="J10"/>
+	<xacro:transmission_block joint_name="J11"/>
+	<xacro:transmission_block joint_name="J12"/>
+	<xacro:transmission_block joint_name="J13"/>
+	<xacro:transmission_block joint_name="J14"/>
+	<xacro:transmission_block joint_name="J15"/>
+	<xacro:transmission_block joint_name="J16"/>
+	<xacro:transmission_block joint_name="J17"/>
+	<xacro:transmission_block joint_name="J18"/>
+	<xacro:transmission_block joint_name="J20"/>
+
+	<xacro:transmission_block joint_name="Probe_joint"/>
+	
+
+	<xacro:velocity_transmission_block joint_name="JointWheel_F_dx"/>
+	<xacro:velocity_transmission_block joint_name="JointWheel_F_sx"/>
+	<xacro:velocity_transmission_block joint_name="JointWheel_R_dx"/>
+	<xacro:velocity_transmission_block joint_name="JointWheel_R_sx"/>
+
+
+
+<!--  <link name="depth_sensor_link">-->
+<!--    <visual>-->
+<!--      <origin xyz="0.0 0 0.0" rpy="0 0 0"/>-->
+<!--      -->
+<!--      <geometry>-->
+<!--        <box size="0.01 0.03 0.01"/>-->
+<!--      </geometry>-->
+
+<!--    <material name="orange"/>-->
+<!--    </visual>-->
+<!--  </link>-->
+<!--  <joint name="depth_sensor_joint" type="fixed">-->
+<!--		<parent link="L20" />-->
+<!--		<child link="depth_sensor_link" />-->
+<!--		<origin xyz="0.1 0.03 0.05" rpy="0 1.57 0"/>-->
+<!--	</joint>-->
+
+<!--	<xacro:include filename="$(find prisma_snake_support_gazebo)/urdf/kinect_macro.xacro" />-->
+<!--	<xacro:kinect parent="depth_sensor_link">-->
+<!--	</xacro:kinect>-->
+
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+		  <robotNamespace>/prisma_snake</robotNamespace>
+		</plugin>
+	</gazebo>
+		
+  </xacro:macro>
+</robot>

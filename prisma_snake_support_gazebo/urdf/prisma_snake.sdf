@@ -1,0 +1,1406 @@
+<sdf version='1.6'>
+  <model name='prisma_snake'>
+    <link name='uav_link'>
+      <pose frame=''>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-9.6e-05 0 -0.031948 0 -0 0</pose>
+        <mass>5.21</mass>
+        <inertia>
+          <ixx>0.144682</ixx>
+          <ixy>0</ixy>
+          <ixz>9.34741e-05</ixz>
+          <iyy>0.153347</iyy>
+          <iyz>-2.09336e-29</iyz>
+          <izz>0.146665</izz>
+        </inertia>
+      </inertial>
+      <collision name='uav_link_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.0001 0.0001 0.0001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/drone_no_prop_no_sup_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='uav_link_fixed_joint_lump__Rover_1_collision_1'>
+        <pose frame=''>-0.3106 0 -0.2455 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/Rover_1_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='uav_link_fixed_joint_lump__Rover_2_collision_2'>
+        <pose frame=''>-0.3106 0 -0.2455 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/Rover_2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='uav_link_fixed_joint_lump__base_link_collision_3'>
+        <pose frame=''>-0.05 0 0.155 3.14159 -0 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='uav_link_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.0001 0.0001 0.0001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/drone_no_prop_no_sup_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='uav_link_fixed_joint_lump__Rover_1_visual_1'>
+        <pose frame=''>-0.3106 0 -0.2455 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/Rover_1_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='uav_link_fixed_joint_lump__Rover_2_visual_2'>
+        <pose frame=''>-0.3106 0 -0.2455 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/Rover_2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='uav_link_fixed_joint_lump__base_link_visual_3'>
+        <pose frame=''>-0.05 0 0.155 3.14159 -0 1.57079</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/base_link.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name='Wheel_dx_1'>
+      <pose frame=''>-0.084 0.087805 -0.113358 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <mass>1.35</mass>
+        <inertia>
+          <ixx>0.0008</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0008</izz>
+        </inertia>
+      </inertial>
+      <collision name='Wheel_dx_1_collision'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='Wheel_dx_1_visual'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JointWheel_F_dx' type='revolute'>
+      <child>Wheel_dx_1</child>
+      <parent>uav_link</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='Wheel_sx_1'>
+      <pose frame=''>-0.084 -0.087805 -0.113358 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <mass>1.35</mass>
+        <inertia>
+          <ixx>0.0008</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0008</izz>
+        </inertia>
+      </inertial>
+      <collision name='Wheel_sx_1_collision'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='Wheel_sx_1_visual'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JointWheel_F_sx' type='revolute'>
+      <child>Wheel_sx_1</child>
+      <parent>uav_link</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='Wheel_dx_2'>
+      <pose frame=''>0.1322 0.087805 -0.113358 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.025 0 0 0 -0 0</pose>
+        <mass>1.35</mass>
+        <inertia>
+          <ixx>0.0008</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0008</izz>
+        </inertia>
+      </inertial>
+      <collision name='Wheel_dx_2_collision'>
+        <pose frame=''>-0.02 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='Wheel_dx_2_visual'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JointWheel_R_dx' type='revolute'>
+      <child>Wheel_dx_2</child>
+      <parent>uav_link</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='Wheel_sx_2'>
+      <pose frame=''>0.1322 -0.087805 -0.113358 0 -0 0</pose>
+      <inertial>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <mass>1.35</mass>
+        <inertia>
+          <ixx>0.0008</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0008</iyy>
+          <iyz>0</iyz>
+          <izz>0.0008</izz>
+        </inertia>
+      </inertial>
+      <collision name='Wheel_sx_2_collision'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='Wheel_sx_2_visual'>
+        <pose frame=''>-0.025 0 0 1.57 -0 1.57</pose>
+        <geometry>
+          <cylinder>
+            <length>0.02</length>
+            <radius>0.035</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JointWheel_R_sx' type='revolute'>
+      <child>Wheel_sx_2</child>
+      <parent>uav_link</parent>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='LFrame'>
+      <pose frame=''>-0.010013 0.007728 0.155 1.5708 3e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>-0.024847 -0.056361 0.01 0 -0 0</pose>
+        <mass>0.0518024</mass>
+        <inertia>
+          <ixx>0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0</iyy>
+          <iyz>0</iyz>
+          <izz>0</izz>
+        </inertia>
+      </inertial>
+      <collision name='LFrame_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/LFrame.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='LFrame_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/LFrame.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JFrame' type='revolute'>
+      <child>LFrame</child>
+      <parent>uav_link</parent>
+      <axis>
+        <xyz>-3e-06 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.05</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='LMotor'>
+      <pose frame=''>-0.010013 0.007728 0.155 -1.57079 0 -1.5708</pose>
+      <inertial>
+        <pose frame=''>-0.009237 -0.040492 -0.048654 0 -0 0</pose>
+        <mass>0.275028</mass>
+        <inertia>
+          <ixx>0.00125021</ixx>
+          <ixy>1.24953e-06</ixy>
+          <ixz>2.19849e-05</ixz>
+          <iyy>0.00125134</iyy>
+          <iyz>-1.41752e-05</iyz>
+          <izz>0.00100274</izz>
+        </inertia>
+      </inertial>
+      <collision name='LMotor_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/LMotor_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='LMotor_fixed_joint_lump__L1_collision_1'>
+        <pose frame=''>0 -0.022448 -0.127545 3.14159 1.57079 3e-06</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L1.STL</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='LMotor_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/LMotor_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='LMotor_fixed_joint_lump__L1_visual_1'>
+        <pose frame=''>0 -0.022448 -0.127545 3.14159 1.57079 3e-06</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L1.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='JMotor' type='revolute'>
+      <child>LMotor</child>
+      <parent>LFrame</parent>
+      <axis>
+        <xyz>1 -7e-06 2e-06</xyz>
+        <limit>
+          <lower>-1.5708</lower>
+          <upper>1.5708</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.05</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L2'>
+      <pose frame=''>-0.190058 0.007729 0.177448 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L2_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L2_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J2' type='revolute'>
+      <child>L2</child>
+      <parent>LMotor</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.04856</lower>
+          <upper>1.04584</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L3'>
+      <pose frame=''>-0.242558 0.007729 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L3_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L3_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J3' type='revolute'>
+      <child>L3</child>
+      <parent>L2</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.03792</lower>
+          <upper>1.05647</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L4'>
+      <pose frame=''>-0.295058 0.00773 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L4_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L4_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J4' type='revolute'>
+      <child>L4</child>
+      <parent>L3</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.04856</lower>
+          <upper>1.04584</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L5'>
+      <pose frame=''>-0.347558 0.00773 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L5_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L5_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J5' type='revolute'>
+      <child>L5</child>
+      <parent>L4</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.04698</lower>
+          <upper>1.04741</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L6'>
+      <pose frame=''>-0.400058 0.00773 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L6_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L6_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J6' type='revolute'>
+      <child>L6</child>
+      <parent>L5</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.04722</lower>
+          <upper>1.04718</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L7'>
+      <pose frame=''>-0.452558 0.007731 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L7_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L7_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J7' type='revolute'>
+      <child>L7</child>
+      <parent>L6</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L8'>
+      <pose frame=''>-0.505058 0.007731 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L8_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L8_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J8' type='revolute'>
+      <child>L8</child>
+      <parent>L7</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L9'>
+      <pose frame=''>-0.557558 0.007731 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L9_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L9_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J9' type='revolute'>
+      <child>L9</child>
+      <parent>L8</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L10'>
+      <pose frame=''>-0.610058 0.007732 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L10_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L10_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J10' type='revolute'>
+      <child>L10</child>
+      <parent>L9</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L11'>
+      <pose frame=''>-0.662558 0.007732 0.177447 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L11_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L11_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J11' type='revolute'>
+      <child>L11</child>
+      <parent>L10</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L12'>
+      <pose frame=''>-0.715058 0.007732 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L12_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L12_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J12' type='revolute'>
+      <child>L12</child>
+      <parent>L11</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L13'>
+      <pose frame=''>-0.767558 0.007733 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L13_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L13_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J13' type='revolute'>
+      <child>L13</child>
+      <parent>L12</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L14'>
+      <pose frame=''>-0.820058 0.007733 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L14_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L14_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J14' type='revolute'>
+      <child>L14</child>
+      <parent>L13</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L15'>
+      <pose frame=''>-0.872558 0.007733 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L15_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L15_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J15' type='revolute'>
+      <child>L15</child>
+      <parent>L14</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L16'>
+      <pose frame=''>-0.925058 0.007734 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L16_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L16_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J16' type='revolute'>
+      <child>L16</child>
+      <parent>L15</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L17'>
+      <pose frame=''>-0.977558 0.007734 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L17_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L17_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J17' type='revolute'>
+      <child>L17</child>
+      <parent>L16</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L18'>
+      <pose frame=''>-1.03006 0.007734 0.177446 1.57079 2e-06 3.14159</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L18_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L18_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L2_cu.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J18' type='revolute'>
+      <child>L18</child>
+      <parent>L17</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0472</lower>
+          <upper>1.0472</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='L20'>
+      <pose frame=''>-1.08256 0.007735 0.177446 1.57079 -3e-06 1.57079</pose>
+      <inertial>
+        <pose frame=''>0.0259 0.024 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='L20_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='L20_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/L20.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='J20' type='revolute'>
+      <child>L20</child>
+      <parent>L18</parent>
+      <axis>
+        <xyz>-2e-06 -3e-06 1</xyz>
+        <limit>
+          <lower>-1.0773</lower>
+          <upper>1.01709</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <link name='Probe'>
+      <pose frame=''>-1.11556 0.007735 0.201446 1.57079 -3e-06 1.57079</pose>
+      <inertial>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <mass>0.02</mass>
+        <inertia>
+          <ixx>0.0006</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0006</iyy>
+          <iyz>0</iyz>
+          <izz>0.0006</izz>
+        </inertia>
+      </inertial>
+      <collision name='Probe_collision'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.055 0.055 0.055</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name='Probe_visual'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://prisma_snake_support_gazebo/meshes/Probe.STL</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='Probe_joint' type='revolute'>
+      <child>Probe</child>
+      <parent>L20</parent>
+      <axis>
+        <xyz>7e-06 1 3e-06</xyz>
+        <limit>
+          <lower>-1.39626</lower>
+          <upper>1.39626</upper>
+          <effort>10</effort>
+          <velocity>1.57</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0.025</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>100.0</updateRate>
+      <topicName>ft_sensor_topic</topicName>
+      <jointName>sensor_joint</jointName>
+    </plugin>
+    <static>0</static>
+    <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <robotNamespace>/prisma_snake</robotNamespace>
+    </plugin>
+  </model>
+</sdf>

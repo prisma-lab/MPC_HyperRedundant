@@ -1,0 +1,95 @@
+digraph G {
+node [shape=box];
+"uav_link" [label="uav_link"];
+"Rover_1" [label="Rover_1"];
+"Wheel_sx_1" [label="Wheel_sx_1"];
+"Wheel_dx_1" [label="Wheel_dx_1"];
+"Rover_2" [label="Rover_2"];
+"Wheel_dx_2" [label="Wheel_dx_2"];
+"Wheel_sx_2" [label="Wheel_sx_2"];
+"base_footprint" [label="base_footprint"];
+"base_link" [label="base_link"];
+"LFrame" [label="LFrame"];
+"LMotor" [label="LMotor"];
+"L1" [label="L1"];
+"L2" [label="L2"];
+"L3" [label="L3"];
+"L4" [label="L4"];
+"L5" [label="L5"];
+"L6" [label="L6"];
+"L7" [label="L7"];
+"L8" [label="L8"];
+"L9" [label="L9"];
+"L10" [label="L10"];
+"L11" [label="L11"];
+"L12" [label="L12"];
+"L13" [label="L13"];
+"L14" [label="L14"];
+"L15" [label="L15"];
+"L16" [label="L16"];
+"L17" [label="L17"];
+"L18" [label="L18"];
+"L20" [label="L20"];
+"Probe" [label="Probe"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"uav_link" -> "JointRoverFront" [label="xyz: -0.06 0 -0.07 \nrpy: 0 -0 0"]
+"JointRoverFront" -> "Rover_1"
+"Rover_1" -> "JointWheel_F_dx" [label="xyz: -0.024 -0.087805 -0.043358 \nrpy: 0 -0 0"]
+"JointWheel_F_dx" -> "Wheel_sx_1"
+"Rover_1" -> "JointWheel_F_sx" [label="xyz: -0.024 0.087805 -0.043358 \nrpy: 0 -0 0"]
+"JointWheel_F_sx" -> "Wheel_dx_1"
+"uav_link" -> "JointRoverRetro" [label="xyz: 0.06 0 -0.07 \nrpy: 0 -0 0"]
+"JointRoverRetro" -> "Rover_2"
+"Rover_2" -> "JointWheel_R_dx" [label="xyz: 0.0722 0.087805 -0.043358 \nrpy: 0 -0 0"]
+"JointWheel_R_dx" -> "Wheel_dx_2"
+"Rover_2" -> "JointWheel_R_sx" [label="xyz: 0.0722 -0.087805 -0.043358 \nrpy: 0 -0 0"]
+"JointWheel_R_sx" -> "Wheel_sx_2"
+"uav_link" -> "base_footprint_joint" [label="xyz: 0 0 -0.3 \nrpy: 0 -0 0"]
+"base_footprint_joint" -> "base_footprint"
+"base_footprint" -> "base_footprint_base_link_joint" [label="xyz: -0.05 0 0.455 \nrpy: 3.1415 6.77626e-21 1.57"]
+"base_footprint_base_link_joint" -> "base_link"
+"base_link" -> "JFrame" [label="xyz: 0.00772822 0.0399874 0 \nrpy: -1.56969 5.55112e-17 -1.57"]
+"JFrame" -> "LFrame"
+"LFrame" -> "JMotor" [label="xyz: 0 0 0 \nrpy: 0 1.5708 -3.14271"]
+"JMotor" -> "LMotor"
+"LMotor" -> "J1" [label="xyz: -2.00511e-05 -0.0224478 -0.127545 \nrpy: 0 1.5708 -3.14048"]
+"J1" -> "L1"
+"L1" -> "J2" [label="xyz: 0.0525 0 0 \nrpy: -3.44613e-16 -0.0531986 6.16156e-17"]
+"J2" -> "L2"
+"L2" -> "J3" [label="xyz: 0.0525 0 0 \nrpy: -1.02483e-15 -0.00927416 1.94244e-16"]
+"J3" -> "L3"
+"L3" -> "J4" [label="xyz: 0.0525 0 0 \nrpy: 6.82181e-16 0.00136089 -1.28642e-16"]
+"J4" -> "L4"
+"L4" -> "J5" [label="xyz: 0.0525 0 0 \nrpy: 6.81746e-16 -0.000213554 -1.28642e-16"]
+"J5" -> "L5"
+"L5" -> "J6" [label="xyz: 0.0525 0 0 \nrpy: -6.8218e-16 2.19048e-05 1.28695e-16"]
+"J6" -> "L6"
+"L6" -> "J7" [label="xyz: 0.0525 0 0 \nrpy: 4.33681e-19 -1.98793e-06 -8.31959e-20"]
+"J7" -> "L7"
+"L7" -> "J8" [label="xyz: 0.0525 0 0 \nrpy: -3.58732e-43 1.54454e-07 2.66349e-20"]
+"J8" -> "L8"
+"L8" -> "J9" [label="xyz: 0.0525 0 0 \nrpy: -4.33681e-19 -1.08901e-08 1.0748e-19"]
+"J9" -> "L9"
+"L9" -> "J10" [label="xyz: 0.0525 0 0 \nrpy: 4.33681e-19 6.92822e-10 -1.6263e-19"]
+"J10" -> "L10"
+"L10" -> "J11" [label="xyz: 0.0525 0 0 \nrpy: -4.33681e-19 -3.65752e-11 7.99046e-20"]
+"J11" -> "L11"
+"L11" -> "J12" [label="xyz: 0.0525 0 0 \nrpy: 1.36393e-15 8.79297e-14 -2.57336e-16"]
+"J12" -> "L12"
+"L12" -> "J13" [label="xyz: 0.0525 0 0 \nrpy: 0 -8.66252e-14 -9.4035e-22"]
+"J13" -> "L13"
+"L13" -> "J14" [label="xyz: 0.0525 0 0 \nrpy: 2.1684e-19 8.65974e-14 -2.71051e-20"]
+"J14" -> "L14"
+"L14" -> "J15" [label="xyz: 0.0525 0 0 \nrpy: 0 -8.9373e-14 -5.51505e-20"]
+"J15" -> "L15"
+"L15" -> "J16" [label="xyz: 0.0525 0 0 \nrpy: 4.33681e-19 8.93174e-14 -5.51505e-20"]
+"J16" -> "L16"
+"L16" -> "J17" [label="xyz: 0.0525 0 0 \nrpy: -4.33681e-19 -8.66252e-14 8.03748e-20"]
+"J17" -> "L17"
+"L17" -> "J18" [label="xyz: 0.0525 0 0 \nrpy: 2.1684e-19 8.65974e-14 -2.71051e-20"]
+"J18" -> "L18"
+"L18" -> "J20" [label="xyz: 0.0525 0 0 \nrpy: 0 -1.5708 -0.000218273"]
+"J20" -> "L20"
+"L20" -> "Probe" [label="xyz: 0 0.0239999 -0.033 \nrpy: 4.32434e-16 2.18991e-14 2.74151e-15"]
+"Probe" -> "Probe"
+}
