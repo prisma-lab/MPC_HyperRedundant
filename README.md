@@ -38,7 +38,7 @@ In the same terminal launch the control node:
 ```
 rosrun prisma_snake_control prisma_snake_final 
 ```
-Follow the instruction on the screen. When the string "TRAJECTORY CORRECTLY PLANNED" appears press play on Gazebo.
+Follow the instruction on the screen. When the string "Planning Completed" appears press play on Gazebo.
 
 ## References
 Code developed by Simone D'Angelo and Antonio Corrado.
