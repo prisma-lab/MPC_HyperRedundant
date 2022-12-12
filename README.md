@@ -6,9 +6,11 @@ The following repository contains the implementation of the inspection task comp
 The Offline navigation function algorithm is written in MATLAB programming language with its version 2019b.
 
 To run the control node it is needed to install the full version of ROS Noetic http://wiki.ros.org/noetic/Installation.
+
 The controller receive the setpoints to compute the desired trajectory offline and than start the control loop.
 
 The MPC is implemented with the ACADOS library in MATLAB and than converted to C code. 
+
 To install Acados on your PC follow the guide here https://github.com/acados/acados
 
 To compile the ros node:
@@ -21,6 +23,7 @@ catkin build prisma_snake_control prisma_snake_support_gazebo industrial_environ
 ```
 
 To run the code:
+
 Launch the simulation on Gazebo in a terminal:
 ```
 roslaunch prisma_snake_support_gazebo prisma_snake.launch 
