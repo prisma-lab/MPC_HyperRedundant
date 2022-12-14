@@ -19,7 +19,7 @@ Create a ros workspace and copy in src the folder prisma_snake_control, prisma_s
 
 Open a terminal and type:
 ```
-catkin build prisma_snake_control prisma_snake_support_gazebo industrial_environment
+catkin build prisma_snake_control prisma_snake_support_gazebo industrial_environment -DCMAKE_BUILD_TYPE=Release
 ```
 
 To run the code:
