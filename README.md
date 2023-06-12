@@ -15,11 +15,11 @@ To install Acados on your PC follow the guide here https://github.com/acados/aca
 
 To compile the ros node:
 
-Create a ros workspace and copy in src the folder prisma_snake_control, prisma_snake_support_gazebo and industrial_environment.
+Create a ros workspace and copy in src the folder prisma_snake_control, prisma_snake_support_gazebo and industrial_worlds.
 
 Open a terminal and type:
 ```
-catkin build prisma_snake_control prisma_snake_support_gazebo industrial_environment -DCMAKE_BUILD_TYPE=Release
+catkin build prisma_snake_control prisma_snake_support_gazebo industrial_worlds -DCMAKE_BUILD_TYPE=Release
 ```
 
 To run the code:
